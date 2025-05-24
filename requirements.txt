@@ -6,3 +6,4 @@ tqdm
 playwright
 python-dotenv
 urllib3
+sib-api-v3-sdk

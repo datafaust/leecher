@@ -3,9 +3,7 @@ CATEGORIES = [
     {'term': 'church', 'category': 'religiousorg'}
 ]
 
-
-
-NYC_ZIPS = [11370, 11368, 11367, 11103]
+NYC_ZIPS = [11746]
 
 CITY = "New York"
 

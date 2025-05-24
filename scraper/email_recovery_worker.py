@@ -1,3 +1,5 @@
+import sys
+import os
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
@@ -15,6 +17,9 @@ from data_utils import SQLiteHandler
 import warnings
 from urllib3.exceptions import InsecureRequestWarning
 from config import FORCE_EMAIL_OVERWRITE
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from scraper.email_utils import clean_email
 
 
 
@@ -36,28 +41,6 @@ headers = {
     "User-Agent": "Mozilla/5.0"
 }
 
-def clean_email(email: str) -> str:
-    if not email or "@" not in email:
-        return ""
-
-    email = email.strip().lower()
-    email = email.replace("mailto:", "")
-    email = email.replace(" ", "").replace("\n", "").replace("\t", "")
-    email = re.sub(r"(\[at\]|\(at\)|\sat\s)", "@", email, flags=re.IGNORECASE)
-    email = re.sub(r"(\[dot\]|\(dot\)|\sdot\s)", ".", email, flags=re.IGNORECASE)
-    email = re.sub(r"[\"\'<>\\]", "", email)
-    email = re.sub(r"^(email|[\d\-\(\)\.]{5,})+", "", email)
-
-    if not EMAIL_REGEX.match(email):
-        return ""
-
-    tlds = [".com", ".org", ".net", ".edu", ".gov", ".us", ".co", ".io", ".info", ".biz"]
-    tld_regex = "(" + "|".join(re.escape(tld) for tld in tlds) + ")"
-    match = re.search(tld_regex, email)
-    if match:
-        email = email[:match.end()]
-
-    return email
 
 def extract_emails_from_text(text):
     emails = set()

@@ -4,7 +4,7 @@
 
 ## Install
 
-- download th latest `businesses.db` file from google drive
+- download the latest `businesses.db` file from google drive
 - create a `.env` and place your yelp API_KEY variable
 - recommend installing anaconda and creating a specific environment
 - run `pip install -r requirements.txt`
@@ -24,11 +24,15 @@ Because scraping is very dynamic the process is done in layers as opposed to in 
 
 ## Generating campaign lists
 
-In order to generate lists by a category search term you can run `data_scripts/campaigns/campaign_list_generator.py` and you will split the master table into email lists with valid unique emails to push to marketing software. Validation is 95% accurate so a few bad emails may squeeze through.
+In order to generate lists by a category search term you can run `data_scripts/campaigns/campaign_list_generator.py` and you will split the master table into email lists with valid unique emails to push to marketing software. Validation is 95% accurate so a few bad emails may squeeze through. Simply run this file once you have your data and it will automatically import into brevo.
 
 ## How to use my config?
 
 FORCE_OVERWRITES are meant to be used when we have improved our scraping functions and want to see if we can squeeze out more information. Search terms and zip codes can be modified as well. Category term is the search you use, category code is codes yelp uses. 
+
+## I wanna see the business list in excel
+
+Run `dump_businesses_table.py` and it will download your entire database to a csv file located at `database_dump/`.
 
 ## Future Improvements
 
